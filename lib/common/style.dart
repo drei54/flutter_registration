@@ -51,7 +51,10 @@ TextStyle style_comp_desc = TextStyle(
   fontSize: 13,
   color: color_white,
 );
-
+TextStyle style_dropdown_label = TextStyle(
+fontSize: 12,
+color: Colors.grey
+);
 
 getFlatButtonStyle(BuildContext context)=> TextButton.styleFrom(
   primary: Colors.white,

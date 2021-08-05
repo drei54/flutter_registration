@@ -35,6 +35,10 @@ const String string_monthly_expense = "Monhtly expense";
 
 const String string_schedule_vc = "Schedule Video Call";
 const String string_schedule_vc_desc = "Choose date and time date you prepared, we will send a link via email to make a video call on the scheduled date and time";
+const String string_date = "date";
+const String string_time = "time";
 
 const String string_choose_opt = "- Choose Option -";
+const String string_choose_date = "- Choose Date -";
+const String string_choose_time = "- Choose Time -";
 const String string_next = "Next";

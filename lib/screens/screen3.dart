@@ -7,6 +7,7 @@ import 'package:register/common/constant_string.dart';
 import 'package:register/common/function.dart';
 import 'package:register/common/style.dart';
 import 'package:register/widget/circle_step.dart';
+import 'package:register/widget/dropdown.dart';
 import 'package:register/widget/next_button.dart';
 
 class Screen3 extends StatefulWidget {
@@ -23,7 +24,7 @@ class _Screen3 extends State<Screen3> {
     var param = <String, dynamic>{'status': 'SUCCESS'};
   }
 
-  String dropdownValue;
+  String _dropDownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +32,15 @@ class _Screen3 extends State<Screen3> {
     var _pageSize = MediaQuery.of(context).size.height;
     var _notifySize = MediaQuery.of(context).padding.top;
     var _appBarSize = MediaQuery.of(context).padding.top + kToolbarHeight;
-    List<String> _locations = ['A', 'B', 'C', 'D']; // Option 2
-    String _selectedLocation; // Option 2
+
+    List<String> gfaOpt = [string_choose_opt, 'One', 'Two', 'Three'];
+    String gfaValue = string_choose_opt;
+
+    List<String> miOpt = [string_choose_opt, 'One', 'Two', 'Three'];
+    String miValue = string_choose_opt;
+
+    List<String> meOpt = [string_choose_opt, 'One', 'Two', 'Three'];
+    String meValue = string_choose_opt;
 
     return Scaffold(
         appBar: appBarDefault(string_create_acccount),
@@ -56,7 +64,7 @@ class _Screen3 extends State<Screen3> {
                       string_personal_info,
                       style: style_label
                   ),
-                  SizedBox(height: 10.0),
+                  SizedBox(height: 12.0),
                   Container(
                     child:Text(
                       string_personal_info_desc,
@@ -65,54 +73,34 @@ class _Screen3 extends State<Screen3> {
 
                   ),
                   SizedBox(height: 30.0),
-                  TextField(
-                    // obscureText: true,
-                    decoration: InputDecoration(
-                      fillColor: color_white,
-                      suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                      filled: true,
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white, width: 10.0),
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
-                      ),
-                      labelText: string_create_pass,
-                      labelStyle: TextStyle(
-                        // color: color_background,
-                      ),
-                    ),
+                  Dropdown(
+                    dropDownValue: gfaValue, label: string_goal_activation, data: gfaOpt,
+                    onChanged: (val) {
+                    setState( () {
+                      gfaValue = val;
+                      print(gfaValue);
+                      });
+                    },
                   ),
-                  SizedBox(height: 10,),
-                  Container(
-                    width: displayWidth(context),
-                    // height: 60,
-                    padding:EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)
-                    ),
-                    // dropdown below..
-                    child: DropdownButton<String>(
-                        value: dropdownValue,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 42,
-                        underline: SizedBox(),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            dropdownValue = newValue;
-                          });
-                        },
-                        items: <String>[
-                          string_choose_opt,
-                          'One',
-                          'Two',
-                          'Three',
-                          'Four'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value, style: TextStyle(color: Colors.grey),),
-                          );
-                        }).toList()),
+                  SizedBox(height: 20,),
+                  Dropdown(
+                    dropDownValue: miValue, label: string_monthly_income, data: miOpt,
+                    onChanged: (val) {
+                      setState( () {
+                        miValue = val;
+                        print(miValue);
+                      });
+                    },
+                  ),
+                  SizedBox(height: 20,),
+                  Dropdown(
+                    dropDownValue: meValue, label: string_monthly_expense, data: meOpt,
+                    onChanged: (val) {
+                      setState( () {
+                        meValue = val;
+                        print(meValue);
+                      });
+                    },
                   ),
                   Expanded(
                     child: Align(

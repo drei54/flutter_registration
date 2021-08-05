@@ -8,6 +8,7 @@ import 'package:register/common/function.dart';
 import 'package:register/common/style.dart';
 import 'package:register/widget/circle_step.dart';
 import 'package:register/widget/custom_size_box.dart';
+import 'package:register/widget/dropdown.dart';
 import 'package:register/widget/next_button.dart';
 
 class Screen4 extends StatefulWidget {
@@ -21,7 +22,6 @@ class _Screen4 extends State<Screen4> {
   @override
   void initState() {
     super.initState();
-    var param = <String, dynamic>{'status': 'SUCCESS'};
   }
 
   @override
@@ -30,6 +30,13 @@ class _Screen4 extends State<Screen4> {
     var _pageSize = MediaQuery.of(context).size.height;
     var _notifySize = MediaQuery.of(context).padding.top;
     var _appBarSize = MediaQuery.of(context).padding.top + kToolbarHeight;
+
+    List<String> dtOpt = [string_choose_date];
+    String dtValue = string_choose_date;
+
+    List<String> tmOpt = [string_choose_time];
+    String tmValue = string_choose_time;
+
 
     return Scaffold(
         appBar: appBarDefault(string_create_acccount),
@@ -50,35 +57,38 @@ class _Screen4 extends State<Screen4> {
                   CircleStep(activeStepNo: 3),
                   SizedBox(height: 60.0),
                   Text(
-                      string_create_pass,
+                      string_schedule_vc,
                       style: style_label
                   ),
                   SizedBox(height: 10.0),
                   Container(
-                    width: displayWidth(context) * 0.65,
                     child:Text(
-                      string_create_pass_desc,
+                      string_schedule_vc_desc,
                       style: style_label_desc,
                     ),
 
                   ),
                   SizedBox(height: 30.0),
-                  TextField(
-                    // obscureText: true,
-                    decoration: InputDecoration(
-                      fillColor: color_white,
-                      suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                      filled: true,
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white, width: 10.0),
-                        borderRadius: BorderRadius.all(Radius.circular(6)),
-                      ),
-                      labelText: string_create_pass,
-                      labelStyle: TextStyle(
-                        // color: color_background,
-                      ),
-                    ),
+                  Dropdown(
+                    dropDownValue: dtValue, label: string_date, data: dtOpt,
+                    onChanged: (val) {
+                      setState( () {
+                        dtValue = val;
+                        print(dtValue);
+                      });
+                    },
                   ),
+                  SizedBox(height: 20,),
+                  Dropdown(
+                    dropDownValue: tmValue, label: string_time, data: tmOpt,
+                    onChanged: (val) {
+                      setState( () {
+                        tmValue = val;
+                        print(tmValue);
+                      });
+                    },
+                  ),
+                  SizedBox(height: 20,),
                   Expanded(
                     child: Align(
                       alignment: FractionalOffset.bottomCenter,
