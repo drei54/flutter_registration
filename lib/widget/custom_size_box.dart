@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:register/common/function.dart';
 
 class CustomSizedBox extends StatelessWidget {
   CustomSizedBox({this.height, this.width});

@@ -2,12 +2,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget appBarDefault() {
+Widget appBarDefault(String title) {
+
   return AppBar(
     title: Text(
-      "Test"
-      // ,
-      // style: kMonteseratNormalWhite,
+        title
     ),
   );
 }
@@ -26,3 +25,6 @@ double displayWidth(BuildContext context) {
   // debugPrint('Width = ' + displaySize(context).width.toString());
   return displaySize(context).width;
 }
+
+const double paddingScreen = 20.0;
+const double circleWidth = 7.0;
