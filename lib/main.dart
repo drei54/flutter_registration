@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:register/screens/ack.dart';
 import 'package:register/screens/screen1.dart';
 import 'package:register/screens/screen2.dart';
 import 'package:register/screens/screen3.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         Screen2.keyword: (context) =>Screen2(),
         Screen3.keyword: (context) =>Screen3(),
         Screen4.keyword: (context) =>Screen4(),
+        Ack.keyword: (context) =>Ack(),
       },
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:register/common/color.dart';
-import 'package:register/common/constant_string.dart';
 import 'package:register/common/style.dart';
 
 class ComplexityItem extends StatelessWidget {
@@ -36,10 +35,10 @@ class ComplexityItem extends StatelessWidget {
         )
         ,Visibility(
           visible: (success) ? false : true,
-          child: Text(title, style: style_comp_title,),
+          child: Text(title, style: styleCompTitle,),
         ),
         SizedBox(height: (!success) ? 6: 10,),
-        Text(label, style: style_comp_desc)
+        Text(label, style: styleCompDesc)
       ],
     );
   }

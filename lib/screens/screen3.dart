@@ -21,10 +21,16 @@ class _Screen3 extends State<Screen3> {
   @override
   void initState() {
     super.initState();
-    var param = <String, dynamic>{'status': 'SUCCESS'};
   }
 
-  String _dropDownValue;
+  List<String> gfaOpt = [string_choose_opt, 'One', 'Two', 'Three'];
+  String gfaValue = string_choose_opt;
+
+  List<String> miOpt = [string_choose_opt, 'Monthly Income 1', 'Monthly Income 2', 'Monthly Income 3'];
+  String miValue = string_choose_opt;
+
+  List<String> meOpt = [string_choose_opt, 'Monthly Expense 1', 'Monthly Expense 2', 'Monthly Expense 3'];
+  String meValue = string_choose_opt;
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +38,6 @@ class _Screen3 extends State<Screen3> {
     var _pageSize = MediaQuery.of(context).size.height;
     var _notifySize = MediaQuery.of(context).padding.top;
     var _appBarSize = MediaQuery.of(context).padding.top + kToolbarHeight;
-
-    List<String> gfaOpt = [string_choose_opt, 'One', 'Two', 'Three'];
-    String gfaValue = string_choose_opt;
-
-    List<String> miOpt = [string_choose_opt, 'One', 'Two', 'Three'];
-    String miValue = string_choose_opt;
-
-    List<String> meOpt = [string_choose_opt, 'One', 'Two', 'Three'];
-    String meValue = string_choose_opt;
 
     return Scaffold(
         appBar: appBarDefault(string_create_acccount),
@@ -62,13 +59,13 @@ class _Screen3 extends State<Screen3> {
                   SizedBox(height: 60.0),
                   Text(
                       string_personal_info,
-                      style: style_label
+                      style: styleLabel
                   ),
                   SizedBox(height: 12.0),
                   Container(
                     child:Text(
                       string_personal_info_desc,
-                      style: style_label_desc,
+                      style: styleLabelDesc,
                     ),
 
                   ),

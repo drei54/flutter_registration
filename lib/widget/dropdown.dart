@@ -28,7 +28,7 @@ class Dropdown extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  child: Text(label, style: style_dropdown_label,)
+                  child: Text(label, style: styleDropdownLabel,)
               ),
               DropdownButton(
                 underline: SizedBox(),

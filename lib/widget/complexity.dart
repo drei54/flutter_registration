@@ -14,13 +14,13 @@ class Complexity extends StatelessWidget {
     // throw UnimplementedError();
     return RichText(
       text: new TextSpan(
-        style: style_label_desc,
+        style: styleLabelDesc,
         children: <TextSpan>[
           new TextSpan(
               text: string_complexity, style: TextStyle(color: color_white)),
           new TextSpan(
               text: text,
-              style: style_label_desc_orange
+              style: styleLabelDescOrange
           ),
         ],
       ),

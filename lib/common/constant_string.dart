@@ -1,7 +1,4 @@
 // String common
-
-import 'package:flutter/material.dart';
-
 const String string_welcome_to = 'Welcome To';
 const String string_gin = 'GIN';
 const String string_finans = " Finans";
@@ -14,7 +11,7 @@ const String string_create_pass_desc = "Password will be use to login account";
 const String string_complexity = 'Complexity: ';
 const String string_very_weak = 'Very weak';
 const String string_weak = 'Weak';
-const String string_medium = 'Very weak';
+const String string_medium = 'Medium';
 const String string_strong = 'Strong';
 
 const String string_a_lc = 'a';
@@ -42,3 +39,9 @@ const String string_choose_opt = "- Choose Option -";
 const String string_choose_date = "- Choose Date -";
 const String string_choose_time = "- Choose Time -";
 const String string_next = "Next";
+
+const String string_error_email = "Please input valid email!";
+const String string_error_password = "Your password must contain at least one number, one special character, and have a mixture of uppercase and lowercase letters.";
+
+const String string_thank_you = "Thank you";
+const String string_ack_desc = "Yuor data has been registered successfully";

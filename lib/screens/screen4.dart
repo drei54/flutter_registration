@@ -7,8 +7,7 @@ import 'package:register/common/constant_string.dart';
 import 'package:register/common/function.dart';
 import 'package:register/common/style.dart';
 import 'package:register/widget/circle_step.dart';
-import 'package:register/widget/custom_size_box.dart';
-import 'package:register/widget/dropdown.dart';
+import 'package:register/widget/datetime_btn.dart';
 import 'package:register/widget/next_button.dart';
 
 class Screen4 extends StatefulWidget {
@@ -24,19 +23,59 @@ class _Screen4 extends State<Screen4> {
     super.initState();
   }
 
+  String _selectDate = string_choose_date;
+  String _selectTime = string_choose_time;
+  var dt ;
+  Future<DateTime> getDate() {
+    // Imagine that this function is
+    // more complex and slow.
+    return showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2018),
+      lastDate: DateTime(2030),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child,
+        );
+      },
+    );
+  }
+
+  void callDatePicker() async {
+    dt = await getDate();
+    setState(() {
+      _selectDate = dateFormatter(dt);
+      print(_selectDate);
+    });
+  }
+
+  Future<TimeOfDay> getTime(){
+    return showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light(),
+          child: child,
+        );
+      },
+    );
+  }
+  void callTimePicker() async {
+    var tm = await getTime();
+    setState(() {
+      _selectTime = tm.format(context);
+      print(_selectTime);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     // final String args = ModalRoute.of(context).settings.arguments;
     var _pageSize = MediaQuery.of(context).size.height;
     var _notifySize = MediaQuery.of(context).padding.top;
     var _appBarSize = MediaQuery.of(context).padding.top + kToolbarHeight;
-
-    List<String> dtOpt = [string_choose_date];
-    String dtValue = string_choose_date;
-
-    List<String> tmOpt = [string_choose_time];
-    String tmValue = string_choose_time;
-
 
     return Scaffold(
         appBar: appBarDefault(string_create_acccount),
@@ -57,37 +96,21 @@ class _Screen4 extends State<Screen4> {
                   CircleStep(activeStepNo: 3),
                   SizedBox(height: 60.0),
                   Text(
-                      string_schedule_vc,
-                      style: style_label
+                      string_personal_info,
+                      style: styleLabel
                   ),
-                  SizedBox(height: 10.0),
+                  SizedBox(height: 12.0),
                   Container(
                     child:Text(
-                      string_schedule_vc_desc,
-                      style: style_label_desc,
+                      string_personal_info_desc,
+                      style: styleLabelDesc,
                     ),
 
                   ),
                   SizedBox(height: 30.0),
-                  Dropdown(
-                    dropDownValue: dtValue, label: string_date, data: dtOpt,
-                    onChanged: (val) {
-                      setState( () {
-                        dtValue = val;
-                        print(dtValue);
-                      });
-                    },
-                  ),
+                  DateTimeBtn(value: _selectDate,label: string_date,onPressed: () => callDatePicker(),),
                   SizedBox(height: 20,),
-                  Dropdown(
-                    dropDownValue: tmValue, label: string_time, data: tmOpt,
-                    onChanged: (val) {
-                      setState( () {
-                        tmValue = val;
-                        print(tmValue);
-                      });
-                    },
-                  ),
+                  DateTimeBtn(value: _selectTime,label: string_time,onPressed: () => callTimePicker(),),
                   SizedBox(height: 20,),
                   Expanded(
                     child: Align(
@@ -97,8 +120,8 @@ class _Screen4 extends State<Screen4> {
                         buttonTitle: string_next,
                         onPressed: () => Navigator.pushNamedAndRemoveUntil(
                           context,
-                          routes_screen4,
-                              (route) => true,
+                          routes_ack,
+                              (route) => false,
                         ),
                       ),
                     ),

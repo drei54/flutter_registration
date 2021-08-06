@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-final background = AssetImage("assets/images/LOGO.png");
+const img_background = AssetImage("assets/images/bg.png");
