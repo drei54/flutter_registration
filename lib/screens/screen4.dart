@@ -17,16 +17,25 @@ class Screen4 extends StatefulWidget {
   _Screen4 createState() => _Screen4();
 }
 
-class _Screen4 extends State<Screen4> {
+class _Screen4 extends State<Screen4> with TickerProviderStateMixin{
+  AnimationController animationController;
+
   @override
   void initState() {
     super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    )
+      ..forward()
+      ..repeat(reverse: true);
   }
 
   String _selectDate = string_choose_date;
   String _selectTime = string_choose_time;
   String _dtError = '';
   String _tmError = '';
+  bool _iconGrow = false;
   bool _valid = false;
 
 
@@ -93,6 +102,12 @@ class _Screen4 extends State<Screen4> {
   }
 
   @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // final String args = ModalRoute.of(context).settings.arguments;
     var _pageSize = MediaQuery.of(context).size.height;
@@ -116,7 +131,34 @@ class _Screen4 extends State<Screen4> {
                 children: [
                   SizedBox(height: 10.0),
                   CircleStep(activeStepNo: 3),
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 10.0),
+                  AnimatedBuilder(
+                    animation: animationController,
+                    builder: (context, child) {
+                      return Container(
+                        decoration: ShapeDecoration(
+                          color: Colors.white.withOpacity(0.5),
+                          shape: CircleBorder(),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0 * animationController.value),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: CircleBorder(),
+                      ),
+                      child: IconButton(
+                        onPressed: () {},
+                        color: Colors.blue,
+                        icon: Icon(Icons.calendar_today, size: 24),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20.0),
                   Text(
                       string_personal_info,
                       style: styleLabel
