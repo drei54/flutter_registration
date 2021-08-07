@@ -25,6 +25,11 @@ class _Screen4 extends State<Screen4> {
 
   String _selectDate = string_choose_date;
   String _selectTime = string_choose_time;
+  String _dtError = '';
+  String _tmError = '';
+  bool _valid = false;
+
+
   var dt ;
   Future<DateTime> getDate() {
     // Imagine that this function is
@@ -70,6 +75,23 @@ class _Screen4 extends State<Screen4> {
       print(_selectTime);
     });
   }
+  navigate(BuildContext context){
+    setState(() {
+      _dtError = (_selectDate == string_choose_date) ? string_error_select: '';
+      _tmError = (_selectTime == string_choose_time) ? string_error_select: '';
+
+      _valid = (_dtError.isEmpty & _tmError.isEmpty);
+    });
+
+    if(_valid) {
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        routes_ack,
+            (route) => true,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // final String args = ModalRoute.of(context).settings.arguments;
@@ -94,7 +116,7 @@ class _Screen4 extends State<Screen4> {
                 children: [
                   SizedBox(height: 10.0),
                   CircleStep(activeStepNo: 3),
-                  SizedBox(height: 60.0),
+                  SizedBox(height: 30.0),
                   Text(
                       string_personal_info,
                       style: styleLabel
@@ -108,21 +130,15 @@ class _Screen4 extends State<Screen4> {
 
                   ),
                   SizedBox(height: 30.0),
-                  DateTimeBtn(value: _selectDate,label: string_date,onPressed: () => callDatePicker(),),
-                  SizedBox(height: 20,),
-                  DateTimeBtn(value: _selectTime,label: string_time,onPressed: () => callTimePicker(),),
-                  SizedBox(height: 20,),
+                  DateTimeBtn(value: _selectDate,label: string_date,onPressed: () => callDatePicker(),errorMsg: _dtError,),
+                  DateTimeBtn(value: _selectTime,label: string_time,onPressed: () => callTimePicker(),errorMsg: _tmError),
                   Expanded(
                     child: Align(
                       alignment: FractionalOffset.bottomCenter,
                       child:
                       NextButton(
                         buttonTitle: string_next,
-                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          routes_ack,
-                              (route) => false,
-                        ),
+                        onPressed: () => navigate(context),
                       ),
                     ),
                   ),

@@ -23,14 +23,31 @@ class _Screen3 extends State<Screen3> {
     super.initState();
   }
 
-  List<String> gfaOpt = [string_choose_opt, 'One', 'Two', 'Three'];
-  String gfaValue = string_choose_opt;
+  List<String> _gfaOpt = [string_choose_opt, 'One', 'Two', 'Three'];
+  List<String> _miOpt = [string_choose_opt, 'Monthly Income 1', 'Monthly Income 2', 'Monthly Income 3'];
+  List<String> _meOpt = [string_choose_opt, 'Monthly Expense 1', 'Monthly Expense 2', 'Monthly Expense 3'];
 
-  List<String> miOpt = [string_choose_opt, 'Monthly Income 1', 'Monthly Income 2', 'Monthly Income 3'];
-  String miValue = string_choose_opt;
+  String _gfaValue = string_choose_opt;
+  String _gfaError = '';
+  String _miValue = string_choose_opt;
+  String _miError = '';
+  String _meValue = string_choose_opt;
+  String _meError = '';
+  bool _valid = false;
 
-  List<String> meOpt = [string_choose_opt, 'Monthly Expense 1', 'Monthly Expense 2', 'Monthly Expense 3'];
-  String meValue = string_choose_opt;
+  navigate(BuildContext context){
+    setState(() {
+      _gfaError = (_gfaValue == string_choose_opt) ? string_error_select: '';
+      _miError = (_miValue == string_choose_opt) ? string_error_select: '';
+      _meError = (_meValue == string_choose_opt) ? string_error_select: '';
+
+      _valid = (_gfaError.isEmpty & _miError.isEmpty & _meError.isEmpty);
+    });
+
+    if(_valid) {
+      Navigator.pushNamed(context, routes_screen4);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +73,7 @@ class _Screen3 extends State<Screen3> {
                 children: [
                   SizedBox(height: 10.0),
                   CircleStep(activeStepNo: 2),
-                  SizedBox(height: 60.0),
+                  SizedBox(height: 20.0),
                   Text(
                       string_personal_info,
                       style: styleLabel
@@ -71,33 +88,34 @@ class _Screen3 extends State<Screen3> {
                   ),
                   SizedBox(height: 30.0),
                   Dropdown(
-                    dropDownValue: gfaValue, label: string_goal_activation, data: gfaOpt,
+                    dropDownValue: _gfaValue, label: string_goal_activation, data: _gfaOpt,
                     onChanged: (val) {
                     setState( () {
-                      gfaValue = val;
-                      print(gfaValue);
+                      _gfaValue = val;
+                      print(_gfaValue);
                       });
                     },
+                    errorMsg: _gfaError
                   ),
-                  SizedBox(height: 20,),
                   Dropdown(
-                    dropDownValue: miValue, label: string_monthly_income, data: miOpt,
+                    dropDownValue: _miValue, label: string_monthly_income, data: _miOpt,
                     onChanged: (val) {
                       setState( () {
-                        miValue = val;
-                        print(miValue);
+                        _miValue = val;
+                        print(_miValue);
                       });
                     },
+                    errorMsg: _miError
                   ),
-                  SizedBox(height: 20,),
                   Dropdown(
-                    dropDownValue: meValue, label: string_monthly_expense, data: meOpt,
+                    dropDownValue: _meValue, label: string_monthly_expense, data: _meOpt,
                     onChanged: (val) {
                       setState( () {
-                        meValue = val;
-                        print(meValue);
+                        _meValue = val;
+                        print(_meValue);
                       });
                     },
+                    errorMsg: _meError
                   ),
                   Expanded(
                     child: Align(
@@ -105,11 +123,7 @@ class _Screen3 extends State<Screen3> {
                       child:
                       NextButton(
                         buttonTitle: string_next,
-                        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          routes_screen4,
-                              (route) => true,
-                        ),
+                        onPressed: () => navigate(context),
                       ),
                     ),
                   ),

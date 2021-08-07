@@ -62,6 +62,8 @@ fontSize: 12,
 color: Colors.grey
 );
 
+TextStyle styleErrorText = TextStyle(color: color_red, fontSize: 12);
+
 getFlatButtonStyle(BuildContext context)=> TextButton.styleFrom(
   primary: Colors.white,
   backgroundColor: color_blue_btn,

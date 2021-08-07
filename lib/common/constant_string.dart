@@ -41,7 +41,8 @@ const String string_choose_time = "- Choose Time -";
 const String string_next = "Next";
 
 const String string_error_email = "Please input valid email!";
+const String string_error_select = "Please select!, this field is required";
 const String string_error_password = "Your password must contain at least one number, one special character, and have a mixture of uppercase and lowercase letters.";
 
 const String string_thank_you = "Thank you";
-const String string_ack_desc = "Yuor data has been registered successfully";
+const String string_ack_desc = "Your data has been registered successfully";

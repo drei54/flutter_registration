@@ -25,13 +25,13 @@ class _Screen2 extends State<Screen2> {
   }
 
   final _passwordController = TextEditingController();
-  bool _valid = false;
+  bool _valid = true;
   String _complexity = "-";
   bool _hasUppercase = false;
   bool _hasDigits = false;
   bool _hasLowercase = false;
   bool _hasSpecialCharacters = false;
-  bool _hasMinLength = false;
+  // bool _hasMinLength = false;
   int _totalCorrect = 0;
   var _complexities = ["-",string_very_weak, string_weak, string_medium, string_strong];
 
@@ -60,6 +60,14 @@ class _Screen2 extends State<Screen2> {
     _totalCorrect = (isCorrect) ? _totalCorrect + 1: _totalCorrect;
   }
 
+  navigate(){
+    validator(_passwordController.text);
+    if(_valid) {
+      Navigator.pushNamed(context, routes_screen3);
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     // final String args = ModalRoute.of(context).settings.arguments;
@@ -84,7 +92,7 @@ class _Screen2 extends State<Screen2> {
                 children: [
                   SizedBox(height: 10.0),
                   CircleStep(activeStepNo: 1),
-                  SizedBox(height: 60.0),
+                  SizedBox(height: 30.0),
                   Text(
                       string_create_pass,
                       style: styleLabel
@@ -132,11 +140,7 @@ class _Screen2 extends State<Screen2> {
                       child:
                       NextButton(
                         buttonTitle: string_next,
-                        onPressed: () => {
-                          if(_valid) {
-                            Navigator.pushNamed(context, routes_screen3)
-                          }
-                        }
+                        onPressed: () => navigate()
                       ),
                     ),
                   ),
